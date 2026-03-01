@@ -1,3 +1,7 @@
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
 /**
  * firestore-type
  *
@@ -50,3 +54,19 @@ export function getDocumentData<T extends DocumentData>(
   }
   return data;
 }
+=======
+export * as core from './core/index.js';
+export * as time from './time/index.js';
+>>>>>>> theirs
+=======
+export * as core from './core/index.js';
+export * as time from './time/index.js';
+>>>>>>> theirs
+=======
+export * as core from './core/index.js';
+export * as time from './time/index.js';
+>>>>>>> theirs
+=======
+export * as core from './core/index.js';
+export * as time from './time/index.js';
+>>>>>>> theirs
