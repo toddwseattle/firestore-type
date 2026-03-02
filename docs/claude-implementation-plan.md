@@ -94,6 +94,43 @@ entry: {
 
 ---
 
+## Phase 2.5 — TimestampFactory in ModelSpec ✅
+
+**Problem surfaced during Phase 2:** `ModelSpec.toPersisted` had signature `(domain: Domain) => PersistedLatest`, giving no way to convert `Date` fields to a Firestore `Timestamp` without importing Firebase SDK inside the model definition — violating the "Firebase imports only in adapters" constraint.
+
+**Solution:** Add an optional `ToTimestamp` factory parameter to `toPersisted`.
+
+### Changes
+
+**`src/core/types.ts`**
+- Import `TimestampLike` from `../time/timestampLike.js` (one-way dep; no cycle)
+- Export `ToTimestamp = (date: Date) => TimestampLike` — a named, documented type
+- Change `toPersisted` signature:
+  ```ts
+  toPersisted: (domain: Domain, toTimestamp?: ToTimestamp) => PersistedLatest;
+  ```
+
+### Why this works
+- **Optional** — models with no timestamp fields call `toPersisted(domain)` unchanged. Existing implementations that only accept `domain` continue to typecheck (TypeScript allows functions to ignore trailing parameters).
+- **No Firebase imports in core** — `TimestampLike` is the library's own duck-typed interface. Firebase `Timestamp` satisfies it structurally.
+- **Caller supplies the factory** — at write time: `TaskModel.toPersisted(task, Timestamp.fromDate.bind(Timestamp))`. The library never holds a Firebase reference.
+- **Read path unchanged** — `readDomain` only calls `fromPersisted`, never `toPersisted`.
+
+### Write-side usage (samples reference)
+```ts
+// Web SDK (firebase-client)
+import { Timestamp } from 'firebase/firestore';
+const persisted = TaskModel.toPersisted(task, (d) => Timestamp.fromDate(d));
+await addDoc(ref, persisted);
+
+// Admin SDK (firebase-admin)
+import { Timestamp } from 'firebase-admin/firestore';
+const persisted = TaskModel.toPersisted(task, (d) => Timestamp.fromDate(d));
+await db.collection('tasks').add(persisted);
+```
+
+---
+
 ## Phase 3 — Expand & Unify Tests
 
 All tests use Vitest (already a devDep). Remove `test/core.test.mjs` and `test/time.test.mjs` (node:test runner). Migrate and expand into `.test.ts` files alongside source.
