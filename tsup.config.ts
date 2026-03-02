@@ -3,8 +3,10 @@ import { defineConfig } from "tsup";
 export default defineConfig({
   entry: {
     index: "src/index.ts",
-    "adapters/browser": "src/adapters/browser.ts",
-    "adapters/node": "src/adapters/node.ts",
+    "core/index": "src/core/index.ts",
+    "time/index": "src/time/index.ts",
+    "adapters/firebase-client/index": "src/adapters/firebase-client/index.ts",
+    "adapters/firebase-admin/index": "src/adapters/firebase-admin/index.ts",
   },
   format: ["esm"],
   dts: true,

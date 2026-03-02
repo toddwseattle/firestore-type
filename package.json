@@ -1,79 +1,36 @@
 {
   "name": "firestore-type",
   "version": "0.1.0",
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
   "description": "TypeScript types and utilities for Firestore, usable in both browser and Node.js environments",
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
-    "./adapters/browser": {
-      "import": "./dist/adapters/browser.js",
-      "types": "./dist/adapters/browser.d.ts"
-    },
-    "./adapters/node": {
-      "import": "./dist/adapters/node.js",
-      "types": "./dist/adapters/node.d.ts"
-    }
-  },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-=======
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-  "description": "Typed domain/persisted toolkit for Firestore-like models",
-  "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    },
     "./core": {
-      "types": "./dist/core/index.d.ts",
-      "default": "./dist/core/index.js"
+      "import": "./dist/core/index.js",
+      "types": "./dist/core/index.d.ts"
     },
     "./time": {
-      "types": "./dist/time/index.d.ts",
-      "default": "./dist/time/index.js"
+      "import": "./dist/time/index.js",
+      "types": "./dist/time/index.d.ts"
     },
     "./adapters/firebase-client": {
-      "types": "./dist/adapters/firebase-client/index.d.ts",
-      "default": "./dist/adapters/firebase-client/index.js"
+      "import": "./dist/adapters/firebase-client/index.js",
+      "types": "./dist/adapters/firebase-client/index.d.ts"
     },
     "./adapters/firebase-admin": {
-      "types": "./dist/adapters/firebase-admin/index.d.ts",
-      "default": "./dist/adapters/firebase-admin/index.js"
+      "import": "./dist/adapters/firebase-admin/index.js",
+      "types": "./dist/adapters/firebase-admin/index.d.ts"
     }
   },
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
   "files": [
     "dist"
   ],
   "scripts": {
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
     "build": "tsup",
     "dev": "tsup --watch",
     "test": "vitest run",
@@ -104,21 +61,5 @@
     "firebase-admin": {
       "optional": true
     }
-=======
-    "build": "tsc -p tsconfig.json",
-    "test": "pnpm build && node --test test/*.test.mjs"
->>>>>>> theirs
-=======
-    "build": "tsc -p tsconfig.json",
-    "test": "pnpm build && node --test test/*.test.mjs"
->>>>>>> theirs
-=======
-    "build": "tsc -p tsconfig.json",
-    "test": "pnpm build && node --test test/*.test.mjs"
->>>>>>> theirs
-=======
-    "build": "tsc -p tsconfig.json",
-    "test": "pnpm build && node --test test/*.test.mjs"
->>>>>>> theirs
   }
 }

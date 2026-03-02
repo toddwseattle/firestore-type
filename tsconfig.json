@@ -1,9 +1,5 @@
 {
   "compilerOptions": {
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
     "target": "ES2020",
     "module": "ESNext",
     "moduleResolution": "bundler",
@@ -18,33 +14,4 @@
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
-=======
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-    "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "strict": true,
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "outDir": "dist",
-    "rootDir": "src",
-    "skipLibCheck": true
-  },
-  "include": ["src"]
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
 }
