@@ -1,0 +1,23 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "../..",
+    "outDir": "./dist",
+    "noEmit": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "rootDirs": ["./src", "../../src"],
+    "paths": {
+      "firestore-type": ["../../src/index.ts"],
+      "firestore-type/core": ["../../src/core/index.ts"],
+      "firestore-type/time": ["../../src/time/index.ts"],
+      "firestore-type/adapters/firebase-client": [
+        "../../src/adapters/firebase-client/index.ts"
+      ],
+      "firestore-type/adapters/firebase-admin": [
+        "../../src/adapters/firebase-admin/index.ts"
+      ]
+    }
+  },
+  "include": ["src/**/*.ts"]
+}

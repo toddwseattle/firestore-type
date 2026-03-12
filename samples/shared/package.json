@@ -1,0 +1,17 @@
+{
+  "name": "@firestore-type/sample-shared",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared sample Task model for firestore-type",
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit",
+    "check": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "firestore-type": "file:../.."
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}
