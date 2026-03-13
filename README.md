@@ -320,4 +320,7 @@ pnpm build
 
 See `docs/firestore-object-toolkit-design.md` for the design overview and `docs/user-guide.md` for additional project documentation.
 
-The shared Task sample model now lives in `samples/shared` and is the starting point for the runnable sample apps.
+Sample projects:
+
+- `samples/shared`: shared Task model with migration and validation
+- `samples/web-app`: runnable React + Vite Firebase Emulator sample using the firebase-client adapter
