@@ -54,7 +54,7 @@ export async function persistProjectWithTasks(
   await runTransaction(store, async (transaction) => {
     transaction.set(
       projectRef,
-      projectModel.toPersisted(project, Timestamp.fromDate),
+      stripUndefined(projectModel.toPersisted(project, Timestamp.fromDate)),
     );
 
     for (const task of tasks) {

@@ -32,12 +32,12 @@ Copy the sample env file and edit the required values:
 cp samples/project-task-sample/.env.local.sample samples/project-task-sample/.env.local
 ```
 
-Required variables:
+Required Firebase config variables (the sample accepts either prefix, and `.env.local.sample` uses the `VITE_FIREBASE_*` form):
 
-- `FIREBASE_API_KEY`
-- `FIREBASE_AUTH_DOMAIN`
-- `FIREBASE_PROJECT_ID`
-- `FIREBASE_APP_ID`
+- `FIREBASE_API_KEY` or `VITE_FIREBASE_API_KEY`
+- `FIREBASE_AUTH_DOMAIN` or `VITE_FIREBASE_AUTH_DOMAIN`
+- `FIREBASE_PROJECT_ID` or `VITE_FIREBASE_PROJECT_ID`
+- `FIREBASE_APP_ID` or `VITE_FIREBASE_APP_ID`
 
 Optional extras (storage, messaging, measurement) are included in the sample file. The sample also reads:
 

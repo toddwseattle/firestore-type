@@ -324,3 +324,4 @@ Sample projects:
 
 - `samples/shared`: shared Task model with migration and validation
 - `samples/web-app`: runnable React + Vite Firebase Emulator sample using the firebase-client adapter
+- `samples/project-task-sample`: CLI runner demonstrating transactional writes to a nested `projects/{projectId}/tasks` subcollection

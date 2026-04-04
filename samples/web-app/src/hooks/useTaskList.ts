@@ -54,7 +54,6 @@ export function useTaskList(): UseTaskListResult {
           ? nextError.message
           : "Failed to create task";
       setMutationError(message);
-      throw nextError;
     }
   }, []);
 
@@ -70,7 +69,6 @@ export function useTaskList(): UseTaskListResult {
           ? nextError.message
           : "Failed to update task";
       setMutationError(message);
-      throw nextError;
     } finally {
       setActionTaskId(null);
     }
@@ -88,7 +86,6 @@ export function useTaskList(): UseTaskListResult {
           ? nextError.message
           : "Failed to delete task";
       setMutationError(message);
-      throw nextError;
     } finally {
       setActionTaskId(null);
     }
