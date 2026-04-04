@@ -66,7 +66,7 @@
 ### Phase 4 — Samples directory
 
 - ✅ `samples/shared/` — shared `Task` domain model (v0→v1 migration, timestamps)
-- ⏳ `samples/web-app/` — React + Vite app demonstrating full read/write flow with firebase-client adapter
+- ✅ `samples/web-app/` — React + Vite app demonstrating full read/write flow with firebase-client adapter
 - ⏳ `samples/firebase-function/` — Cloud Function demonstrating migration-on-read with firebase-admin adapter
 
 ### Docs housekeeping

@@ -1,0 +1,28 @@
+{
+  "name": "@firestore-type/sample-web-app",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "React + Vite Firestore emulator sample for firestore-type",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p tsconfig.json --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "verify:live": "tsx scripts/liveVerification.ts"
+  },
+  "dependencies": {
+    "firebase": "^12.0.0",
+    "firestore-type": "file:../..",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.0.2",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.4"
+  }
+}

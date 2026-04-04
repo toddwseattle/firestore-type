@@ -212,10 +212,11 @@ If you only want structural typing helpers, the adapters also export `toTypedSna
 The sample work is now centered on a shared Task model package:
 
 - `samples/shared/`: reusable Task model, persisted shapes, migration, and timestamp helpers.
-- `samples/web-app/`: planned runnable React + Vite example using the Firebase Web SDK.
+- `samples/web-app/`: runnable React + Vite example using the Firebase Web SDK and the firebase-client adapter.
+- `samples/project-task-sample/`: CLI runner that demonstrates writing a `Project` document and its `tasks` subcollection inside a single transaction while reusing the shared `taskModel`.
 - `samples/firebase-function/`: planned runnable admin-side example for Cloud Functions and the emulator.
 
-Start with `samples/shared` if you want the clearest end-to-end example of the library contract.
+Start with `samples/shared`, then run `samples/web-app` to see create/read/update/delete flows against the Firestore emulator.
 
 ## 7) Remaining work
 
@@ -223,5 +224,5 @@ The core library is implemented and the Firebase adapters ship today. The main r
 
 - stronger migration typing for per-version chains
 - a defensive helper for non-advancing migrations
-- runnable end-to-end sample apps for the emulator
+- complete the firebase-admin runnable sample app
 - a dedicated API reference document
