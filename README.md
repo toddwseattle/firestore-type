@@ -357,6 +357,42 @@ import {
 } from "firestore-type/react";
 ```
 
+## Claude Code agents
+
+The package ships two [Claude Code](https://claude.ai/code) subagent definitions in the `agents/` directory. Once installed they automate the most repetitive parts of adopting the library.
+
+| File | What it does |
+|------|-------------|
+| `agents/persistInterfaceToFirebase.md` | Give it a TypeScript interface and it scaffolds the full `firestore-type` model: persisted type, validator, `defineModel` with `toPersisted`/`fromPersisted`, and a Firebase Web SDK usage snippet |
+| `agents/createFirestoreHooks.md` | Give it an existing model and collection reference and it generates typed React hooks (`use<Name>List`, `use<Name>Document`) that compose `useFirestoreCollectionDomain`, `useFirestoreDocumentDomain`, and `useFirestoreMutations` |
+
+### Using the agents
+
+Copy the agent files you want into your project's `.claude/agents/` directory:
+
+```bash
+mkdir -p .claude/agents
+cp node_modules/firestore-type/agents/persistInterfaceToFirebase.md .claude/agents/
+cp node_modules/firestore-type/agents/createFirestoreHooks.md .claude/agents/
+```
+
+Claude Code picks up any `.md` files in `.claude/agents/` automatically. The agents will then appear when Claude decides the task matches their description, or you can invoke them explicitly:
+
+```
+Use the persistInterfaceToFirebase agent to scaffold a model for this interface:
+
+interface Product {
+  name: string;
+  price: number;
+  createdAt: Date;
+}
+```
+
+```
+Use the createFirestoreHooks agent to generate React hooks for productModel
+using the productsCollection reference in src/lib/firestore.ts.
+```
+
 ## Development
 
 ```bash
