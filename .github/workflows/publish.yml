@@ -12,7 +12,6 @@ jobs:
   publish:
     if: github.repository == 'bridgenodelabs/firestore-models'
     runs-on: ubuntu-latest
-    environment: npm-publish
     concurrency:
       group: publish-${{ github.ref }}
       cancel-in-progress: false
