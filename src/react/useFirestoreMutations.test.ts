@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { renderHook, waitFor } from "@testing-library/react";
 
 import { defineModel } from "../core/defineModel.js";
+import type { TimestampLike } from "../time/timestampLike.js";
 import { useFirestoreMutations } from "./useFirestoreMutations.js";
 
 const addDocMock = vi.hoisted(() => vi.fn());
@@ -40,7 +41,14 @@ describe("useFirestoreMutations", () => {
   });
 
   it("converts domain values before create and strips undefined fields", async () => {
-    const model = defineModel({
+    const model = defineModel<
+      { title: string; dueAt?: Date },
+      {
+        schemaVersion: 1;
+        title: string;
+        dueAt?: TimestampLike;
+      }
+    >({
       currentVersion: 1,
       toPersisted: (domain: { title: string; dueAt?: Date }, toTimestamp) => ({
         schemaVersion: 1 as const,

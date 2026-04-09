@@ -5,6 +5,7 @@
     "outDir": "./dist",
     "noEmit": true,
     "forceConsistentCasingInFileNames": true,
+    "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "rootDirs": ["./src", "../../src"],
     "paths": {
