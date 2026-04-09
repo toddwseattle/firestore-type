@@ -9,7 +9,7 @@ import {
 import {
   readDocumentDomain,
   type BrowserDocumentSnapshot,
-} from "firestore-type/adapters/firebase-client";
+} from "@bridgenodelabs/firestore-models/adapters/firebase-client";
 
 import { projectModel, type Project } from "../models/project";
 import {
@@ -36,9 +36,10 @@ function toPersistedTask(task: Task): TaskPersistedV1 {
   return stripUndefined(persisted);
 }
 
-function stripUndefined<T extends Record<string, unknown>>(value: T): T {
+function stripUndefined<T extends object>(value: T): T {
+  const record = value as Record<string, unknown>;
   return Object.fromEntries(
-    Object.entries(value).filter(([, fieldValue]) => fieldValue !== undefined),
+    Object.entries(record).filter(([, fieldValue]) => fieldValue !== undefined),
   ) as T;
 }
 
