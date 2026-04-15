@@ -29,7 +29,7 @@ In package.json:
 - Add `repository`: `{ "type": "git", "url": "https://github.com/bridgenodelabs/firestore-models" }`
 - Add `homepage`: `"https://github.com/bridgenodelabs/firestore-models"`
 - Add `bugs`: `{ "url": "https://github.com/bridgenodelabs/firestore-models/issues" }`
-- Add `engines`: `{ "node": ">=18.0.0", "pnpm": ">=9" }`
+- Add `engines`: `{ "node": ">=22.0.0", "pnpm": ">=9" }`
 - Add `packageManager`: `"pnpm@9.0.0"`
 
 
@@ -67,7 +67,9 @@ This excludes dev/docs artifacts while keeping dist/ and agents/ (implicitly inc
 
 ---
 
-## PHASE B: Local Testing with bmc
+## PHASE B: Local Testing with bmc - Complete
+
+Status: Complete. Local bmc validation has succeeded and the project is ready to move into Phase C publish-pipeline hardening.
 
 Validate library integration and behavior with a real consumer project using local file references.
 
@@ -118,12 +120,18 @@ Validate library integration and behavior with a real consumer project using loc
 
 After bmc testing succeeds, harden the automation pipeline for production releases.
 
+Approved Phase C decisions:
+
+- Use npm Trusted Publishing / GitHub OIDC as the primary publish path.
+- Set the supported Node.js floor to Node 22.
+- Enforce package tarball contents with a failing CI/publish check.
+
 ### C1. Verify agents inclusion
 
 **Keep agents included** by confirming package.json "files" array includes both dist/ and agents/, then validate tarball contents to ensure no accidental artifacts are shipped:
 
 ```bash
-npm pack --dry-run
+pnpm run pack:check
 # Confirm dist/ and agents/ are present
 # Confirm docs/, samples/, .claude/ are absent
 ```
@@ -135,7 +143,7 @@ Create `.github/workflows/ci.yml`:
 - Triggered on pull_request and push to main
 - Install with pnpm
 - Run `pnpm run lint`, `pnpm run typecheck`, `pnpm run test`, `pnpm run build`
-- Optionally run `npm pack --dry-run` to verify tarball integrity
+- Run `pnpm run pack:check` to verify tarball integrity
 - Fail the workflow if any check fails
 
 ### C3. Add publish workflow
@@ -146,12 +154,13 @@ Create `.github/workflows/publish.yml`:
 - Checkout, setup Node.js + pnpm
 - Install dependencies
 - Run full verification pipeline (lint, test, build)
-- Publish to npm scope @bridgenodelabs with `--access=public`
+- Verify tag version matches package.json version
+- Publish to npm scope @bridgenodelabs with `--access=public --provenance`
 
 ### C4. Configure org/repo settings for publishing security
 
 - Set least-privilege workflow permissions (read-only by default, explicit allowlist for publish workflow)
-- Configure npm provenance/trusted publishing with GitHub OIDC (preferred), or use scoped NPM_TOKEN secret as fallback
+- Configure npm Trusted Publishing / GitHub OIDC for `bridgenodelabs/firestore-models`
 - Enable required branch protections for main branch
 - Protect release tags (prevent accidental overwrites)
 

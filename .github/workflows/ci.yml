@@ -23,7 +23,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: pnpm
 
       - name: Install dependencies
@@ -42,4 +42,4 @@ jobs:
         run: pnpm run build
 
       - name: Verify package contents
-        run: npm pack --dry-run
+        run: pnpm run pack:check

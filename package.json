@@ -43,7 +43,8 @@
     "test:watch": "vitest",
     "lint": "tsc --noEmit",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "pnpm run lint && pnpm run test && pnpm run build",
+    "pack:check": "node scripts/verify-package-contents.mjs",
+    "prepublishOnly": "pnpm run lint && pnpm run test && pnpm run build && pnpm run pack:check",
     "prepare": "husky"
   },
   "keywords": [
@@ -63,7 +64,7 @@
     "url": "https://github.com/bridgenodelabs/firestore-models/issues"
   },
   "engines": {
-    "node": ">=20.0.0",
+    "node": ">=22.0.0",
     "pnpm": ">=9"
   },
   "packageManager": "pnpm@9.0.0",
