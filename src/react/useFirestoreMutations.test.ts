@@ -156,6 +156,52 @@ describe("useFirestoreMutations", () => {
     );
   });
 
+  it("updateById does not forward undefined fields in partial patches", async () => {
+    const model = defineModel<
+      { title: string; done: boolean; dueAt?: Date },
+      { schemaVersion: 1; title: string; done: boolean; dueAt?: TimestampLike }
+    >({
+      currentVersion: 1,
+      toPersisted: (domain, toTimestamp) => ({
+        schemaVersion: 1 as const,
+        title: domain.title,
+        done: domain.done,
+        dueAt: domain.dueAt ? toTimestamp?.(domain.dueAt) : undefined,
+      }),
+      toPartialPersisted: (patch, toTimestamp) => ({
+        ...(patch.title !== undefined ? { title: patch.title } : {}),
+        ...(patch.done !== undefined ? { done: patch.done } : {}),
+        ...(patch.dueAt !== undefined
+          ? { dueAt: patch.dueAt ? toTimestamp?.(patch.dueAt) : patch.dueAt }
+          : {}),
+      }),
+      fromPersisted: (persisted) => ({
+        title: persisted.title,
+        done: persisted.done,
+      }),
+    });
+
+    docMock.mockReturnValue({ path: "tasks/task-2" });
+    updateDocMock.mockResolvedValue(undefined);
+
+    const { result } = renderHook(() =>
+      useFirestoreMutations({
+        collection: { path: "tasks" } as never,
+        model,
+      }),
+    );
+
+    await result.current.updateById("task-2", {
+      done: true,
+      dueAt: undefined,
+    });
+
+    expect(updateDocMock).toHaveBeenCalledWith(
+      { path: "tasks/task-2" },
+      { done: true },
+    );
+  });
+
   it("updateById surfaces a missing toPartialPersisted error", async () => {
     const model = defineModel({
       currentVersion: 1,
